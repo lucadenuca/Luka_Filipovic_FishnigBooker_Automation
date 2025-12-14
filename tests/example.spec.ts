@@ -62,7 +62,9 @@ test('Florida page: validate all cards on 1st page', async ({ page }) => {
 
 //2.
 test('Florida page: multiple page navigation (hardcoded 5 pages) & check for prices desending on each page', async ({ page }) => {
-   const navigateTo = new NavigationPage(page)
+  
+
+  const navigateTo = new NavigationPage(page)
   await navigateTo.topDestinationFlorida()
   const floridaPage = new FloridaPage(page)
 
