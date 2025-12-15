@@ -4,6 +4,8 @@
 
     Tests are written in TypeScript and use Playwright Test Runner.
 
+   
+
 *Project Structure*
 
     project-root/
@@ -36,11 +38,14 @@
             - Navigates to the filters and selects the filter 'Price (Highest)'
             - After the page is loaded with the applied filter the prices from the charter cards are collected and it checks if they are in desendign order
     
-    The 2nd test is an extra effort test:
-        This test does the validation of all charter cards on the first page
+    The 2nd test is an extra effort test: (Extra effort test 1)
+        This test does the validation of all charter cards on the Florida top destination first page
     
-    The 3rd test is an extra effort test:
-        This test check the validation of all cards on the first 5 pages and check if all the prices are in descending order on every page
+    The 3rd test is an extra effort test: (Extra effort test 2)
+        This test check the validation of all cards on the first 5 pages of Florida top destinations and check if all the prices are in descending order on every page
+    
+    The 4th test is an extra effort test: (Extra effort test 3)
+        This test validates all cards on the last page of Florida top destinations.
 
 
 *Prerequisites*
@@ -71,7 +76,7 @@
     e.g. :
     cd C:\Users\Luka\OneDrive\Desktop\Luka_Filipovic_FishnigBooker_Automation
 
-3. Run the required test of the assignemnt
+3. Run the required test of the assignemnt (The CMD comands are given with chrome browser, you can change it to firefox for FireFox, webkit for Safari)
 
     npx playwright test -g "Florida page: Validation of number of cards loaded" --project=chromium --headed
 
@@ -82,6 +87,10 @@
 5. Run the extra effor test 2
 
     npx playwright test -g "Florida page: multiple page navigation" --project=chromium --headed
+
+6. Run the exta effort test 3
+
+    npx playwright test -g "Florida page: validate all cards on last page" --project=chromium --headed
 
 
 

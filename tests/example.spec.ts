@@ -61,7 +61,7 @@ test('Florida page: validate all cards on 1st page', async ({ page }) => {
 })
 
 //2.
-test('Florida page: multiple page navigation (hardcoded 5 pages) & check for prices desending on each page', async ({ page }) => {
+test('Florida page: multiple page navigation (hardcoded 5 pages) & check for prices desending on each page and validates all cards', async ({ page }) => {
   
 
   const navigateTo = new NavigationPage(page)
@@ -70,7 +70,7 @@ test('Florida page: multiple page navigation (hardcoded 5 pages) & check for pri
 
   await page.locator('[data-testid="sort-price-highest-button"]').click()
   
-  const totalPagesToCheck = 5; // DEFINE THE AMMOUNT OF PAGES
+  const totalPagesToCheck = 5; 
 
   for (let currentPage = 1; currentPage <= totalPagesToCheck; currentPage++) {
     console.log(`➡️ Checking page ${currentPage}`)
@@ -80,12 +80,12 @@ test('Florida page: multiple page navigation (hardcoded 5 pages) & check for pri
     const totalCards = await floridaPage.getNumberOfCards()
     console.log(`✔️ ${totalCards} charter cards loaded on page ${currentPage}`)
 
-    // for (let i = 0; i < totalCards; i++) {
-    //   console.log(`➡️ Validating charter card ${i + 1} on page ${currentPage}`)
-    //   await floridaPage.validateCard(i)
-    // }
+    for (let i = 0; i < totalCards; i++) {
+      console.log(`➡️ Validating charter card ${i + 1} on page ${currentPage}`)
+      await floridaPage.validateCard(i)
+    }
 
-    // console.log(`✅ All  charter cards on page ${currentPage} passed validation`)
+    console.log(`✅ All  charter cards on page ${currentPage} passed validation`)
 
     const prices = await floridaPage.getAllPrices()
     console.log(`Prices on page ${currentPage}:`, prices)
@@ -103,5 +103,27 @@ test('Florida page: multiple page navigation (hardcoded 5 pages) & check for pri
   }
 
   console.log(`✅ All prices are in descending order and validated all charter cards on first ${totalPagesToCheck} pages`)
+
+})
+
+test('Florida page: validate all cards on last page', async ({ page }) => {
+  const navigateTo = new NavigationPage(page)
+  await navigateTo.topDestinationFlorida()
+  const floridaPage = new FloridaPage(page)
+
+  await page.locator('[data-testid="destination-listings-preview-view-all-button"]').click()
+  
+  await page.locator('[aria-label*="Go to page"]').last().click()
+
+  const totalCards = await floridaPage.getNumberOfCards()
+  
+  console.log(`✅ ${totalCards} Charter Cards loaded`)
+
+  for (let i = 0; i < totalCards; i++) {
+    console.log(`➡️ Validating Charter Card ${i+1}`)
+    await floridaPage.validateCard(i)
+  }
+
+  console.log(`✅ All ${totalCards} Charter Cards passed validation on the last page`)
 
 })
